@@ -1,4 +1,10 @@
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
 import React from "react";
@@ -7,14 +13,23 @@ import Leftbar from "../components/leftBar/Leftbar";
 import Rightbar from "../components/rightBar/Rightbar";
 import Home from "../pages/home/Home";
 import ProfilePage from "../pages/profil/Profil";
+import "../style.scss";
+import { useSelector } from "react-redux";
+
+const currentUser = true;
 
 const Layout = () => {
+  const darkMode = useSelector((state) => state.darkMode.darkMode);
+
+  console.log(darkMode);
   return (
-    <div>
+    <div className={`theme-${darkMode ? "dark" : "light"}`}>
       <Navbar />
       <div style={{ display: "flex" }}>
         <Leftbar />
-        <Outlet />
+        <div style={{ flex: 6 }}>
+          <Outlet /> {/* Aquí se mostrarán las rutas anidadas */}
+        </div>
         <Rightbar />
       </div>
     </div>
@@ -24,14 +39,18 @@ const Layout = () => {
 const Router = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile/:id" element={<ProfilePage />} />
-      </Route>
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-
-      {/* Es muy recomendable añadir esta ruta para obtener un mensaje de error en el caso de que la ruta no exista. De lo contrario, si la ruta no existe llegaremos a una página en blanco */}
+      {currentUser ? (
+        <>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="profile/:id" element={<ProfilePage />} />
+          </Route>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </>
+      ) : (
+        <Route index element={<Login />} />
+      )}
       <Route path="*" element={<div>404</div>} />
     </Routes>
   </BrowserRouter>

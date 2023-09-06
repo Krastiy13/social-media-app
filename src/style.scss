@@ -1,0 +1,38 @@
+$themes: (
+    light: (textColor: #000,
+        bg: white,
+        logo: darkblue, // Cambiado punto y coma por coma
+        bgsoft: #f6f3f3,
+        textColorsoft: #555,
+        border: lightgray),
+    dark: ( // Cambiado "dartk" a "dark"
+        textColor: whitesmoke,
+        bg: #222,
+        logo: white,
+        bgSoft: #333, // Cambiado de camelCase a kebab-case
+        border: #444)
+);
+
+$theme-map: null !global;
+
+@mixin themify($themes) {
+
+    @each $theme,
+    $map in $themes {
+        .theme-#{$theme} & {
+            $theme-map: () !global;
+
+            @each $key,
+            $value in $map {
+                $theme-map: map-merge($theme-map, ($key: $value )) !global;
+            }
+
+            @content;
+            $theme-map: null !global;
+        }
+    }
+}
+
+@function themed($key) {
+    @return map-get($theme-map, $key);
+}
