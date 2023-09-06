@@ -1,0 +1,86 @@
+.register {
+    height: 100vh;
+    background-color: #9ef7bd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .card {
+        display: flex;
+        width: 50%;
+        border-radius: 10px;
+        background-color: white;
+        min-height: 600px;
+
+        .right {
+            flex: 1;
+            background: linear-gradient(#52d35f3f, rgba(224, 223, 223, 0.527)), url("https://plus.unsplash.com/premium_photo-1664392248318-4e1d9361726e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1966&q=80")center;
+            background-size: cover;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            color: white;
+
+            h1 {
+                font-size: 100px;
+                line-height: 100px;
+            }
+
+            p {}
+
+            span {
+                font-size: 14px;
+            }
+
+            button {
+                width: 30%;
+            
+                border: none;
+                background-color: white;
+                cursor: pointer;
+                border-radius: 20px;
+                font-weight: bold;
+                padding: 10px;
+            }
+        }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            color: black;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+
+            h1 {}
+
+            form {
+                display: flex;
+                flex-direction: column;
+                width: 90%;
+                gap: 30px;
+
+                input {
+                    border: none;
+                    border-bottom: 1px solid black;
+                    padding: 20px 10px;
+                    outline: none;
+                }
+
+                button {
+                    width: 30%;
+                    border: none;
+                    background-color: #52d35f;
+                    cursor: pointer;
+                    border-radius: 20px;
+                    font-weight: bold;
+                    padding: 10px;
+                }
+            }
+
+        }
+    }
+
+}
