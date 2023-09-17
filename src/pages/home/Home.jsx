@@ -2,9 +2,11 @@ import React from "react";
 import "./home.scss";
 import Stories from "../../components/stories/Stories";
 import Posts from "../../components/posts/Posts";
+import Share from "../../components/share/share";
 const Home = () => {
   return (
     <div className="home">
+      <Share />
       <Stories />
       <Posts />
     </div>

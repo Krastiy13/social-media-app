@@ -1,13 +1,15 @@
 import React from "react";
 import "./leftbar.scss";
+import { useDispatch, useSelector } from "react-redux";
 
 const Leftbar = () => {
+  const authUser = useSelector((state) => state.userAuth.userAuth);
   return (
     <div className="leftBar">
       <div className="container">
         <div className="menu">
           <div className="user">
-            <img alt="" />
+            <img src={authUser.coverPic} alt="" />
             <span></span>
           </div>
           <div className="item">

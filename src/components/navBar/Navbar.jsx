@@ -12,13 +12,18 @@ import React, { useEffect, useState } from "react";
 import imagen from "../../assets/WhatsApp Image 2023-05-27 at 00.05.45.jpeg";
 import { toggleDarkMode, updateDarkmode } from "../../redux/slice/darkmode";
 import { useDispatch, useSelector } from "react-redux";
+import { setUserAuth } from "../../redux/slice/authuser";
 
 const Navbar = () => {
-  const darkMode = useSelector((state) => state.darkMode.darkMode);
   const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.darkMode.darkMode);
+  const authUser = useSelector((state) => state.userAuth.userAuth);
 
   useEffect(() => {
     const darkMode = JSON.parse(localStorage.getItem("darkMode"));
+    const userAuth = JSON.parse(localStorage.getItem("userAuth"));
+
+    dispatch(setUserAuth(userAuth));
 
     // Despacha la acción "updateDarkmode" con el valor de "darkMode" desde el localStorage
     dispatch(updateDarkmode(darkMode));
@@ -48,7 +53,7 @@ const Navbar = () => {
         <EmailOutlinedIcon />
         <NotificationsOutlinedIcon />
         <div className="user">
-          <img src={imagen} alt="" />
+          <img src={authUser.coverPic} alt="" />
           <span>Mohamed asdaf</span>
         </div>
       </div>

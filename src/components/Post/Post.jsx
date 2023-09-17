@@ -8,12 +8,16 @@ import { Link } from "react-router-dom";
 import Comments from "../comments/Coments";
 import { useState } from "react";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
-
+  const authUser = useSelector((state) => state.userAuth.userAuth);
+  console.log(authUser.coverPic);
   //TEMPORARY
   const liked = false;
+
+  console.log(post.id, " nombre de la imagen");
 
   return (
     <div className="post">
@@ -28,14 +32,14 @@ const Post = ({ post }) => {
               >
                 <span className="name">{post.name}</span>
               </Link>
-              <span className="date">1 min ago</span>
+              <span className="date">{post.createdAt}</span>
             </div>
           </div>
           <MoreHorizIcon />
         </div>
         <div className="content">
           <p>{post.desc}</p>
-          <img src={post.img} alt="" />
+          <img src={"../../../public/upload/" + post.img} alt="" />
         </div>
         <div className="info">
           <div className="item">
@@ -51,7 +55,7 @@ const Post = ({ post }) => {
             Share
           </div>
         </div>
-        {commentOpen && <Comments />}
+        {commentOpen && <Comments postId={post.id} />}
       </div>
     </div>
   );
